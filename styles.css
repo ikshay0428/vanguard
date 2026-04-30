@@ -415,8 +415,9 @@ form {
 .left, .right {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem; /* spacing between fields */
+    gap: 1.25rem;
 }
+
 input, textarea {
     background: white;
     border: 1px solid var(--blue);
