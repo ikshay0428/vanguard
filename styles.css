@@ -66,7 +66,7 @@ table {
 /* GLOBAL STYLES (MOBILE FIRST (SMALL) */
 body {
     font-family: var(--font);
-    background: var(--black);
+    background: var(--white);
     color: var(--white);
     line-height: 1.6;
 }
@@ -127,9 +127,23 @@ nav a {
     font-weight: 600;
     letter-spacing: 1px;
     transition: 0.3s;
+    position: relative;
+}
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: var(--blue);
+    transition: width 0.3s ease;
 }
 nav a:hover {
     color: white;
+}
+nav a:hover::after {
+    width: 100%;
 }
 /* ADD TO "INNOVATION & INVESTMENT SECTION (Photo by Kevin Matos on Unsplash) */
  #hero {
@@ -146,6 +160,10 @@ nav a:hover {
     padding: 2rem;
     border-radius: 10px;
     max-width: 600px;
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease forwards;
 }
 /* ADD FLOATING SVG LOGO BEFORE THE H1 */
  #hero h2::before {
@@ -166,6 +184,17 @@ nav a:hover {
     margin-top: 1rem;
     border-radius: 6px;
     text-decoration: none;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+.btn:hover,
+button:hover {
+    background: #FF4500; /* orange */
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 /* ABOUT */
 #about {
@@ -189,6 +218,7 @@ nav a:hover {
 .grid {
     display: grid;
     gap: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .grid article {
@@ -196,6 +226,11 @@ nav a:hover {
     padding: 1.5rem;
     border-radius: 10px;
     min-height: 150px;
+}
+
+.grid article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* RESULTS */
@@ -211,8 +246,14 @@ nav a:hover {
 
 .results-container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 2rem;
+}
+.results-table,
+#bar-chart {
+    flex: 1;
+    width: auto;
 }
 form {
     display: grid;
@@ -222,6 +263,10 @@ form {
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 0.4rem;
+}
+.form-group.full {
+    grid-column: span 2;
 }
 input, textarea {
     background: white;
@@ -229,6 +274,7 @@ input, textarea {
     border: 2px solid var(--blue);
     padding: 0.75rem;
     width: 100%;
+    border-radius: 6px;
 }
 
 textarea {
@@ -238,30 +284,40 @@ textarea {
 button {
     background: var(--blue);
     color: white;
+    width: 100%;
+    margin-top: 0.5rem;
     padding: 1rem;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    grid-column: span 1;
 }
 
 /* TABLE */
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+}
 table {
     width: 100%;
     background: black;
     font-size: 1rem;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+tr {
+    border-bottom: 1px solid #444;
 }
 .results-container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 2rem;
 }
 .results-table,
-.results-chart {
-    width: 50%;
-}
-.results-chart {
-    display: flex;
-    align-items: flex-end;
+#bar-chart {
+    flex: 1;
+    width: auto;
 }
 th {
     background: #111;
@@ -286,6 +342,8 @@ tr:nth-child(even) {
     max-width: none;
     padding: 1rem;
     position: relative;
+    flex: 1;
+    min-height: 300px;
 }
 /* ADD ON TRANSITION ON HEIGHT */
 .bar {
@@ -293,8 +351,9 @@ tr:nth-child(even) {
     background: var(--charcoal);
     border-radius: 10px;
     position: relative;
-    transition: ;
     height: 0;
+    animation: stepUp 1s ease-in-out forwards;
+    transition: height 0.5s ease;
 }
 /* THIS ONE IS DONE FOR YOU */
 .bar::after {
@@ -315,6 +374,12 @@ tr:nth-child(even) {
         height: var(--height);
     }
 }
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* ADD ANIMATION ON stepUp for 1s ease-in-out forwards */
 .bar {
     animation: stepUp 1s ease-in-out forwards;
@@ -324,6 +389,19 @@ tr:nth-child(even) {
 #contact {
     background: var(--black);
     padding: 3rem 0;
+}
+
+#contact .container {
+    max-width: 900px;
+    padding: 0 1rem;
+}
+
+#contact h2 {
+    margin-bottom: 1rem;
+}
+
+#contact p {
+    margin-bottom: 2rem;
 }
 
 form {
@@ -338,6 +416,7 @@ input, textarea {
     border: 2px solid var(--blue);
     padding: 0.75rem;
     width: 100%;
+    border-radius: 6px;
 }
 
 textarea {
@@ -388,6 +467,8 @@ footer a:hover {
 
     form {
         grid-template-columns: 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 1.5rem;
     }
     .form-group.full {
         grid-column: span 2;
@@ -398,6 +479,7 @@ footer a:hover {
 
     button {
         grid-column: span 2;
+        width: 100%;
     }
 }
 /* MEDIA QUERIES (LARGE) */
