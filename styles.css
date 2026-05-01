@@ -63,16 +63,16 @@ table {
     --font: "Inter", sans-serif;
 }
 
-/* GLOBAL STYLES (MOBILE FIRST (SMALL) */
+
 body {
     font-family: var(--font);
     background: var(--white);
     color: var(--white);
     line-height: 1.6;
 }
-/* MIN-WIDTH OF THE PAGE SHOULD NOT GO BELOW 400PX */
 
-/* ADD A DIV WITH THE CLASS OF CONTAINER TO EVERY CONTENT CONTAINER THIS IS ALLOW THE BASE ELEMENTS TO BE 100% WIDTH, BUT CONSTRAIN THE ACTUAL CONTENT TO 90% */
+
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -82,6 +82,20 @@ body {
 header {
     background: #000;
     padding: 1rem 0;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.4);
+}
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--blue);
+    box-shadow:
+        0 0 8px var(--blue),
+        0 0 16px rgba(0, 123, 255, 0.8);
 }
 h1 {
     font-size: 1.75rem;
@@ -96,6 +110,11 @@ h3 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+}
+h1, h2, h3 {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeUp 1s ease forwards;
 }
 p {
     font-size: 0.95rem;
@@ -118,6 +137,17 @@ header .container {
     width: 40px;
 }
 nav ul {
+    display: flex;
+    gap: 2rem;
+}
+.menu-icon {
+    display: none;
+}
+
+#menu-toggle {
+    display: none;
+}
+nav ul.nav-links {
     display: flex;
     gap: 2rem;
 }
@@ -147,8 +177,8 @@ nav a:hover::after {
 }
 /* ADD TO "INNOVATION & INVESTMENT SECTION (Photo by Kevin Matos on Unsplash) */
  #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.107), rgba(0, 0, 0, 0.75)), url('images/vanguard-hero.jpg') no-repeat center center/cover;
-    height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('images/vanguard-hero.jpg') no-repeat center center/cover;
+    height: 60vh;
     display: grid;
     place-items: center;
     text-align: center;
@@ -200,19 +230,22 @@ button:hover {
 #about {
     background: #eaeaea;
     color: #000;
-    padding: 3rem 0;
+    padding: 2rem 0;
+    padding-bottom: 1rem;
 }
 
 #about h2 {
-    margin-bottom: 2.2rem;
+    margin-bottom: 0.25rem;
     color: var(--black);
 }
 #about p {
     color: var(--charcoal);
+    margin-bottom: 0;
 }
 /* SERVICES */
 #services {
     padding: 2rem 0;
+    padding-top: 1rem;
 }
 
 .grid {
@@ -446,6 +479,8 @@ button {
 
 /* FOOTER */
 footer {
+    background: var(--black);
+    color: var(--white);
     text-align: center;
     padding: 1rem 0;
     font-size: 0.9rem;
@@ -460,7 +495,32 @@ footer a:hover {
 }
 /* MEDIA QUERIES (MEDIUM) */ 
     @media (min-width: 768px) {
+     .menu-icon {
+        display: block;
+        font-size: 2rem;
+        color: var(--blue);
+        cursor: pointer;
+    }
 
+    nav {
+        display: none;
+        width: 100%;
+    }
+
+    #menu-toggle:checked + .menu-icon + nav {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        background: black;
+        padding: 1rem;
+    }
+
+    header .container {
+        flex-wrap: wrap;
+    }
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -470,7 +530,7 @@ footer a:hover {
     flex-direction: row;
     align-items: stretch;
     gap: 2rem;
-}
+    }
     .results-table,
     #bar-chart {
         width: 50%;
